@@ -12,6 +12,7 @@ import AppButton from './AppButton.js';
 import Globalstyle from '../Globalstyle.js';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
+import { addShippingAddress } from '../Redux/Actions/cartaction.js';
 
 
 const shippingSchema = Yup.object().shape({
@@ -23,7 +24,7 @@ const shippingSchema = Yup.object().shape({
 const CheckoutForms = ({ setModal }) => {
   const dispatch = useDispatch()
   const handleShippingSubmit = (value) => {
-    dispatch({ type: 'ADD_SHIPPING_INFO', payload: value })
+    dispatch(addShippingAddress(value))
     setModal(false)
   }
   return (

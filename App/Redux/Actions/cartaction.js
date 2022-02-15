@@ -21,3 +21,9 @@ export const deleteCartItem = (product) => async (dispatch, getState) => {
 
   storeData('cart', getState().cart.cartItems)
 }
+
+
+export const addShippingAddress = (value) => async (dispatch) => {
+  dispatch({ type: 'ADD_SHIPPING_INFO', payload: value })
+  await storeData('shippingInfo', value)
+}

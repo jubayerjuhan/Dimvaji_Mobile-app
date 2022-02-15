@@ -21,13 +21,16 @@ export const getData = async (key) => {
 }
 
 
-export const fetchCartData = () => async (dispatch) => {
+export const fetchDataFromStorage = () => async (dispatch) => {
   try {
     await SecureStore.getItemAsync('cart').then((value) => {
       dispatch({ type: 'FETCH_CART_ITEMS', payload: JSON.parse(value) })
     });
     await SecureStore.getItemAsync('user').then((value) => {
       dispatch({ type: 'FETCH_USER', payload: JSON.parse(value) })
+    })
+    await SecureStore.getItemAsync('shippingInfo').then((value) => {
+      dispatch({ type: 'ADD_SHIPPING_INFO', payload: JSON.parse(value) })
     })
 
   } catch (err) {

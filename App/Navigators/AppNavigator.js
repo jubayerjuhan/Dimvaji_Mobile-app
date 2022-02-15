@@ -9,7 +9,7 @@ import ProductColumn from '../Screens/ProductColumn.js';
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => (
   <Stack.Navigator
-    screenOptions={{ headerShown: false }}
+    screenOptions={{ headerShown: false, gestureEnabled: true, gestureDirection: 'horizontal' }}
   >
     <Stack.Screen name='Home' component={Homescreen} />
     <Stack.Screen name='Checkout' component={CheckoutScreen} />

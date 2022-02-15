@@ -12,9 +12,12 @@ import Screen from '../Components/Screen.js';
 import Globalstyle from '../Globalstyle.js';
 import WalletIcon from './WalletIcon.js';
 import CustomAlert from '../Components/CustomAlert.js'
+import { placeOrder } from '../Redux/Actions/orderaction.js';
+import { useDispatch } from 'react-redux';
 
 
 const CheckoutScreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [modalName, setModalName] = useState(false);
   const [alert, setAlert] = useState({
@@ -26,11 +29,13 @@ const CheckoutScreen = ({ navigation, route }) => {
     setModalName(payment ? 'Payment' : 'Address');
   }
   const { shippingInfo } = useSelector(state => state.cart);
+  const { user } = useSelector(state => state.user);
+  const { cartItems } = useSelector(state => state.cart);
   const { quantity, total } = route.params;
 
   const handlePlaceOrder = () => {
     if (!shippingInfo) return setAlert({ ...alert, visible: true, message: 'Please Enter Shipping Info' })
-    console.log('Order Placed')
+    dispatch(placeOrder(shippingInfo, user, cartItems))
   }
 
   // handleCLose alert

@@ -4,11 +4,11 @@ import Appcolor from '../Appcolor.js';
 import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
 
-const DescriptionComponent = () => {
+const DescriptionComponent = ({ description }) => {
   return (
     <View style={styles.container}>
       <AppText style={styles.title} font='Montserrat_500Medium'>Description</AppText>
-      <AppText style={styles.text} font='Montserrat_300Light'>For now, the Lenovo Yoga 920 is the highest variant of the Yoga series. The specifications are no joke. With the 8th generation Kaby Lake Refresh Intel Core i7-8550U processor.</AppText>
+      <AppText style={styles.text} font='Montserrat_300Light'>{description}</AppText>
 
     </View>
   );

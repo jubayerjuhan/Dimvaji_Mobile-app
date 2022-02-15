@@ -1,29 +1,53 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Bagicon from '../../assets/Bagicon.js';
 import Appcolor from '../Appcolor.js';
 import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
+import { AntDesign } from '@expo/vector-icons';
+import LottieView from 'lottie-react-native';
 
-const AppButton = ({ title = 'Save', style, Icon }) => {
+
+const AppButton = ({ loading, title = 'Save', style, Icon = <AntDesign name="save" size={30} color={Appcolor.white} />, handlePress }) => {
   return (
-    <View style={[styles.container, style]}>
-      <AppText font='Montserrat_600SemiBold' style={styles.text}>{title}</AppText>
-      <View style={styles.iconContainer}>
-        {Icon}
+    <TouchableOpacity onPress={handlePress}>
+      <View style={[styles.container, style]}>
+        {!loading ?
+          (<AppText font='Montserrat_600SemiBold' style={styles.text}>{title}</AppText>) :
+          (<View style={styles.animation}>
+            <LottieView
+              autoPlay
+              loop
+              style={{
+                width: 30,
+                height: 30,
+              }}
+              source={require('../../assets/activiteIndicator.json')}
+            />
+          </View>)}
+        {/* Lottie */}
+        <View style={styles.iconContainer}>
+          {Icon}
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
+  animation: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '80%',
+  },
   container: {
-    width: '100%',
+    minWidth: '40%',
     backgroundColor: Appcolor.primary,
     height: 70,
     borderRadius: 14,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     overflow: 'hidden',
   },
@@ -33,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 14,
-    width: 70,
+    width: '20%',
   },
   icon: {
     color: Appcolor.white,

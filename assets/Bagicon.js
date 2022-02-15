@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 const Bagicon = ({ size = 20, color, style }) => {
-  console.log(color, "color")
   return (
     <View style={style}>
 

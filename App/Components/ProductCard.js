@@ -1,16 +1,21 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Appcolor from '../Appcolor.js';
 import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
 
-const ProductCard = () => {
+const ProductCard = ({ product, onPress }) => {
+  console.log(product);
+
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={{ uri: 'https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy,c_fill,g_auto/7ed0855435194229a525aad6009a0497_9366/Superstar_Shoes_White_EG4958_01_standard.jpg' }} />
-      <AppText numberOfLines={2} style={styles.text} font='Montserrat_600SemiBold'>Adidas Super Star New York Edition Of The Year</AppText>
+      <TouchableOpacity onPress={onPress}>
+        <Image style={styles.img} source={{ uri: product?.images[0].url }} />
+        <AppText numberOfLines={2} style={styles.text} font='Montserrat_600SemiBold'>{product?.name}</AppText>
 
-      <AppText style={styles.price} font='Montserrat_600SemiBold'>$120</AppText>
+        <AppText style={styles.price} font='Montserrat_600SemiBold'>{`$${product?.price}`}</AppText>
+      </TouchableOpacity>
     </View>
   );
 }

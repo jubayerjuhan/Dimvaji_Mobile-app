@@ -23,7 +23,6 @@ const AuthScreen = ({ navigation: { goBack }, route }) => {
     password: Yup.string().required('Password Required').min(4, 'Password must be at least 4 characters'),
   });
   const { loggedIn, error, loading } = useSelector(state => state.user)
-  console.log(loggedIn, 'LoggedIn in AuthScreen')
 
   // start 
   const handleFormSubmit = async (values) => {

@@ -28,8 +28,9 @@ import {
   Montserrat_800ExtraBold_Italic,
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat';
-import { fetchCartData, getData } from './App/Store/StoreData.js';
+import { fetchCartData, fetchDataFromStorage, getData } from './App/Store/StoreData.js';
 import { useSelector } from 'react-redux';
+import AuthNavigator from './App/Navigators/AuthNavigator.js';
 
 
 
@@ -62,28 +63,48 @@ const App = () => {
     setUser(user)
   }
 
-  if (!ready) {
-    return (<AppLoading
-      startAsync={loadUser}
-      onFinish={() => setReady(true)}
-      onError={console.warn}
-    />
-    )
-  }
+
+
   if (!fontsLoaded) return null;
   return (
     <Provider store={store}>
+      <Ready />
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
         >
-          {!user && <Stack.Screen name="Authentication" component={AuthNavigator} />}
           <Stack.Screen name="Main" component={MainNavigator} />
-
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
+}
+
+const Ready = () => {
+  const [ready, setReady] = useState(ready);
+  const dispatch = useDispatch();
+
+  const dispatchData = () => {
+    dispatch(fetchDataFromStorage());
+  }
+
+  if (!ready) {
+    return (<AppLoading
+      startAsync={dispatchData}
+      onFinish={() => {
+        setTimeout(() => {
+          setReady(true);
+        }, 500);
+      }}
+      onError={console.warn}
+    />
+    )
+  }
+  return (
+    <View>
+      {/* <Text>Ready</Text> */}
+    </View>
+  )
 }
 
 export default App;

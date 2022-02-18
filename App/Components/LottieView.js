@@ -3,19 +3,25 @@ import { View, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 
-const LottieViewer = () => {
+const LottieViewer = ({ source, style }) => {
   return (
-    <LottieView
-      autoPlay
-      loop
-      source={require('../../assets/boxloader.json')}
-    />
+    <View style={styles.wrapper}>
+      <LottieView
+        autoPlay
+        loop
+        source={source}
+        style={[style, styles.container]}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+
+  wrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 export default LottieViewer;

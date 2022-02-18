@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     paddingVertical: Globalstyle.paddingSmall,
     flexDirection: 'row',
     alignItems: 'center',
+    zIndex: 1,
   },
   headerName: {
     color: Appcolor.primary,

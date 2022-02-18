@@ -5,7 +5,7 @@ import Appcolor from '../Appcolor.js';
 import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
 
-const ProductCard = ({ product, onPress }) => {
+const ProductCard = ({ product, onPress, }) => {
   console.log(product);
 
   return (

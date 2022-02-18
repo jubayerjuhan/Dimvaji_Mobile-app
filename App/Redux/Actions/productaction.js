@@ -6,8 +6,10 @@ export const getProducts = (keyword = '', ratings = 0, gte = 1, lte = 100000, pa
   try {
     dispatch({ type: "ALL_PRODUCTS_PENDING" })
 
-    const { data } = await client.get(link);
-    dispatch({ type: "ALL_PRODUCTS_FULFILLED", payload: data })
+    const res = await client.get(link);
+    console.log(res, 'response productacion')
+    if (!res.ok) return dispatch({ type: "ALL_PRODUCTS_REJECTED", payload: "Can't Connect At This Moment" })
+    dispatch({ type: "ALL_PRODUCTS_FULFILLED", payload: res.data })
   } catch (err) {
     dispatch({ type: "ALL_PRODUCTS_REJECTED", error: err.message || err.response.data.message })
 

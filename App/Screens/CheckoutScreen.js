@@ -14,16 +14,20 @@ import WalletIcon from './WalletIcon.js';
 import CustomAlert from '../Components/CustomAlert.js'
 import { placeOrder } from '../Redux/Actions/orderaction.js';
 import { useDispatch } from 'react-redux';
+import LottieView from 'lottie-react-native';
+
 
 
 const CheckoutScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [modalName, setModalName] = useState(false);
+  const { loading, success } = useSelector(state => state.order)
   const [alert, setAlert] = useState({
     visible: false,
     message: ''
   })
+
   const handleEditPress = (payment, address) => {
     setModal(true);
     setModalName(payment ? 'Payment' : 'Address');
@@ -43,6 +47,13 @@ const CheckoutScreen = ({ navigation, route }) => {
     setAlert({ ...alert, visible: false, message: null })
   }
 
+  const handleCloseModal = () => {
+    dispatch({ type: 'RESET_SUCCESS' })
+  }
+
+  const handleOrderRoute = () => {
+
+  }
   return (
     <Screen style={styles.container}>
       <CustomAlert message={alert.message} visible={alert.visible} onPress={closeAlert} />
@@ -56,7 +67,19 @@ const CheckoutScreen = ({ navigation, route }) => {
           <AppText style={styles.text}>Total Price</AppText>
           <AppText style={styles.price} font='Montserrat_700Bold'>{`$${total}`}</AppText>
         </View>
-        <AppButton Icon={<WalletIcon />} title='Place Order' handlePress={handlePlaceOrder} />
+        <AppButton Icon={<WalletIcon />} title='Place Order' handlePress={handlePlaceOrder} loading={loading} />
+        {success && (<CustomAlert
+          onPressSec={handleOrderRoute}
+          onPress={handleCloseModal}
+          message='Order Placed Successfully'
+          secBtnTitle='Order'
+          Animation={
+            <LottieView
+              autoPlay
+              loop={false}
+              source={require('../../assets/payment-done.json')}
+            />
+          } />)}
       </View>
 
       {/*  */}

@@ -34,7 +34,6 @@ const CheckoutForms = ({ setModal }) => {
       onSubmit={(values) => handleShippingSubmit(values)}
     >
       {({ handleChange, errors, handleSubmit }) => (
-        console.log(errors),
         <View style={styles.container}>
           <FontAwesome onPress={() => setModal(false)} style={styles.times} name="times" size={30} color={Appcolor.primary} />
           <TextInputIcon

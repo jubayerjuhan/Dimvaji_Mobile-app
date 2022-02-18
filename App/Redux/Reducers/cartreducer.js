@@ -7,7 +7,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       const isItemExist = state.cartItems.find(
         (i) => i._id === item._id
       );
-      console.log(isItemExist)
       if (isItemExist) {
         return {
           ...state,

@@ -13,9 +13,7 @@ const MainNavigator = () => {
   const [ready, setReady] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
-  useEffect(() => {
-    dispatch(fetchDataFromStorage());
-  }, []);
+
 
   return (
     <Stack.Navigator
@@ -23,6 +21,7 @@ const MainNavigator = () => {
         headerShown: false,
       }}
     >
+      {!user && <Stack.Screen name="Authentication" component={AuthNavigator} />}
       <Stack.Screen name="App" component={AppNavigator} />
     </Stack.Navigator>
   )

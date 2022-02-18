@@ -21,10 +21,8 @@ export const orderReducer = (state = {}, action) => {
     case 'RESET_SUCCESS':
       return {
         ...state,
-        success: false,
+        success: null,
       }
-
-
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import { productReducer } from "./Reducers/productreducer.js";
 import { cartReducer } from "./Reducers/cartreducer.js";
 import { useState } from "react";
 import { getData } from "../Store/StoreData.js";
+import { orderReducer } from "./Reducers/orderreducer.js";
 
 const middlewares = [thunk, logger];
 
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   user: authenticationReducer,
   products: productReducer,
   cart: cartReducer,
+  order: orderReducer,
 })
 
 

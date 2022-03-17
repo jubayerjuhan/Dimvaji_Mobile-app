@@ -21,7 +21,7 @@ const MainNavigator = () => {
         headerShown: false,
       }}
     >
-      {!user && <Stack.Screen name="Authentication" component={AuthNavigator} />}
+      {/* {(!user || user === null) && <Stack.Screen name="Authentication" component={AuthNavigator} />} */}
       <Stack.Screen name="App" component={AppNavigator} />
     </Stack.Navigator>
   )

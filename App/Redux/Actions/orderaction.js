@@ -1,7 +1,7 @@
 import client from "../../api/client.js"
 
 
-export const placeOrder = (shipping, user, items) => async (dispatch) => {
+export const placeOrder = (shipping, user, items, discount, paymentMethod) => async (dispatch) => {
   shipping.city = shipping.area;
   shipping.phoneNumber = shipping.phone;
   let totalPrice = 0;
@@ -13,13 +13,14 @@ export const placeOrder = (shipping, user, items) => async (dispatch) => {
     orderItems: items,
     paymentInfo: {
       id: user._id,
-      status: "COD",
+      status: paymentMethod?.name,
     },
     paidAt: Date.now(),
 
     priceBreakdown: {
-      subtotal: totalPrice,
+      subtotal: totalPrice - discount,
       gst: 0,
+      discount,
       shippingCharge: 0,
       totalPrice,
     }
@@ -36,6 +37,19 @@ export const placeOrder = (shipping, user, items) => async (dispatch) => {
   } catch (error) {
     console.log(error)
     dispatch({ type: 'ORDER_FAILED', payload: error.response.data.message })
+  }
+}
+
+
+export const getUserOrder = () => async (dispatch) => {
+  try {
+    dispatch({ type: 'USER_ORDER_PENDING' })
+    const { data } = await client.get('/my-orders')
+    if (data.success === false) return dispatch({ type: 'USER_ORDER_FAILED', payload: data.message })
+    dispatch({ type: 'USER_ORDER_SUCCESS', payload: data.orders })
+  } catch (error) {
+    console.log(error)
+    dispatch({ type: 'USER_ORDER_FAILED', payload: error.response.data.message })
   }
 
 }

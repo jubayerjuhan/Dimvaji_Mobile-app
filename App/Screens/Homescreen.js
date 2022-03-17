@@ -38,11 +38,11 @@ const Homescreen = ({ navigation }) => {
         keyExtractor={(item) => item.toString()}
         ListHeaderComponent={
           <>
-            <IconHorizontal style={styles.iconHorizontal} />
-            <View style={styles.greet}>
+            <IconHorizontal style={styles.iconHorizontal} navigation={navigation} />
+            {user && <View style={styles.greet}>
               <AppText style={styles.text} font="Montserrat_700Bold">Hello, {user?.name}!</AppText>
               <AppText style={styles.description}>Welcome back</AppText>
-            </View>
+            </View>}
 
             <FlatList
               horizontal
@@ -58,8 +58,8 @@ const Homescreen = ({ navigation }) => {
 
         ListFooterComponent={
           <>
-            <PopularCategory title='Popular Category' />
-            <Categoryswipe />
+            <PopularCategory title='Popular Kitchens' navigation={navigation} />
+            <Categoryswipe navigation={navigation} />
           </>
         }
         renderItem={({ item }) => (
@@ -73,7 +73,7 @@ const Homescreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   categoryCardWrapper: {
     marginTop: 25,
-    paddingHorizontal: GlobalStyle.paddingLarge,
+    marginLeft: 20,
     maxHeight: 150,
   },
   greet: {

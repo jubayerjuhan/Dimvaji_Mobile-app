@@ -1,29 +1,22 @@
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
-    case "ADD_TO_CART":
-      const item = action.payload;
-      console.log(action.payload)
-
-      const isItemExist = state.cartItems.find(
-        (i) => i._id === item._id
-      );
-      if (isItemExist) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((i) => i._id === isItemExist._id ? item : i)
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [...state.cartItems, item],
-        };
+    case 'ADD_TO_CART':
+      return {
+        ...state,
+        cartItems: state.cartItems ? [...state.cartItems, action.payload] : [action.payload]
       }
 
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cartItems: state.cartItems.filter((i) => i._id !== action.payload),
+        cartItems: state.cartItems?.filter((i) => i._id !== action.payload),
       };
+
+    case "RESET_CART":
+      return {
+        ...state,
+        cartItems: []
+      }
     case "ADD_SHIPPING_INFO":
       return {
         ...state,

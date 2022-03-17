@@ -3,11 +3,13 @@ import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import AppText from '../AppText.js';
 
 const Categorycard = ({ title, style, large, item, onPress }) => {
+  console.log(item.image);
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={[{ width: large ? 250 : 150, height: large ? 120 : 70 }, styles.container, style]}>
         {/* <View style={[{ width: large ? 250 : 150, height: large ? 120 : 70 }, styles.container2, style]} /> */}
-        <Image style={styles.img} source={item?.image} />
+        {large && <Image style={styles.img} source={item?.image} />}
+        {!large && <Image style={styles.imgSmall} source={{ uri: `${item?.image}` }} />}
         <AppText font='Montserrat_600SemiBold' style={[{
           fontSize: large ? 16 : 12,
           bottom: large ? 20 : 12,
@@ -32,6 +34,10 @@ const styles = StyleSheet.create({
   },
   img: {
     opacity: 0.6,
+  },
+  imgSmall: {
+    height: '100%',
+    width: '100%',
   }
 });
 

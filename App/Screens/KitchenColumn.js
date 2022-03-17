@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import Appcolor from '../Appcolor.js';
 import AppHeader from '../Components/AppHeader.js';
 import AppText from '../Components/AppText.js';
@@ -11,35 +10,28 @@ import Globalstyle from '../Globalstyle.js';
 import { getProducts } from '../Redux/Actions/productaction.js';
 import ErrorRetry from '../Components/ErrorRetry.js';
 import AppButton from '../Components/AppButton.js';
+import { FlatList } from 'react-native';
+import { useDispatch } from 'react-redux';
+import client from '../api/client.js';
 
-const ProductColumn = ({ route, navigation }) => {
+const KitchenColumn = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector(state => state.products);
-  const { category } = route.params
+  const [products, setProducts] = useState([])
+  const { kitchen } = route.params
 
   useEffect(() => {
-    fetchProducts();
+    client.get(`/product/kitchen/${kitchen?._id}`).then((res) => {
+      setProducts(res.data.products)
+    })
   }, [])
-
-  const fetchProducts = () => {
-    dispatch(getProducts('', 0, 1, 100000, 1, category));
-  }
-
-  // handlepress
-  const handleProductPress = (product) => {
-    navigation.navigate('Product', { product });
-  }
-  console.log('====================================');
-  console.log(products, 'productsss');
-  console.log('====================================');
 
 
   return (
     <Screen>
       <AppHeader abselute navigation={navigation} />
       <View style={styles.container}>
-        <AppText font='Montserrat_600SemiBold' style={styles.title}>{category}</AppText>
-        {(loading) && (
+        <AppText font='Montserrat_600SemiBold' style={styles.title}>{kitchen?.name}</AppText>
+        {(false) && (
           <View style={styles.loading}>
             <LottieViewer
               style={{ height: 300, width: '100%' }}
@@ -47,9 +39,9 @@ const ProductColumn = ({ route, navigation }) => {
           </View>
         )
         }
-        {error &&
+        {false &&
           <View style={styles.error}>
-            <ErrorRetry error={error} onPress={() => fetchProducts()} />
+            <ErrorRetry error={error} onPress={() => { }} />
           </View>}
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -57,10 +49,13 @@ const ProductColumn = ({ route, navigation }) => {
           style={styles.list}
           columnWrapperStyle={styles.flatList}
           numColumns={2}
-          data={products?.products}
+          data={products}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => (
-            <ProductCard onPress={() => handleProductPress(item)} product={item}>Hello</ProductCard>
+
+            <ProductCard onPress={() => {
+              navigation.navigate('Product', { product: item });
+            }} product={item} />
           )}
         />
       </View>
@@ -99,4 +94,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProductColumn;
+export default KitchenColumn;

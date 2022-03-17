@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-web';
 import Appcolor from '../Appcolor.js';
 import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
 
-const ProductCard = ({ product, onPress, }) => {
+const ProductCard = ({ product, onPress }) => {
   console.log(product);
 
   return (
@@ -17,6 +18,7 @@ const ProductCard = ({ product, onPress, }) => {
         <AppText style={styles.price} font='Montserrat_600SemiBold'>{`$${product?.price}`}</AppText>
       </TouchableOpacity>
     </View>
+
   );
 }
 

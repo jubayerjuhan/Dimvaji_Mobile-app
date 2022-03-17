@@ -27,3 +27,9 @@ export const addShippingAddress = (value) => async (dispatch) => {
   dispatch({ type: 'ADD_SHIPPING_INFO', payload: value })
   await storeData('shippingInfo', value)
 }
+
+
+export const resetCart = () => async (dispatch) => {
+  dispatch({ type: 'RESET_CART' })
+  await storeData('cart', [])
+}

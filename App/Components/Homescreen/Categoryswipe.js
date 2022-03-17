@@ -9,7 +9,7 @@ import ErrorRetry from '../ErrorRetry.js';
 import LottieViewer from '../LottieView.js';
 import ProductCard from '../ProductCard.js';
 
-const Categoryswipe = () => {
+const Categoryswipe = ({ navigation }) => {
   const dispatch = useDispatch();
   const category = [
     { name: 'Bachelor Food', category: 'Bachelor Food Package', },
@@ -25,6 +25,10 @@ const Categoryswipe = () => {
 
   const fetchProducts = () => {
     dispatch(getProducts('', 0, 1, 100000, 1, selectedCategory.category));
+  }
+
+  const handleProductCardPress = (product) => {
+    navigation.navigate('Product', { product });
   }
 
 
@@ -63,7 +67,9 @@ const Categoryswipe = () => {
           <ErrorRetry onPress={() => fetchProducts()} error={error} />
         </View>
       }
-      <FlatList
+
+      {/* fetched product */}
+      {(!loading && products) && <FlatList
         numColumns={2}
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         showsVerticalScrollIndicator={false}
@@ -72,9 +78,9 @@ const Categoryswipe = () => {
         ItemSeparatorComponent={() => <View style={styles.separatorProductCard} />}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <ProductCard product={item} />
+          <ProductCard product={item} onPress={() => handleProductCardPress(item)} />
         )}
-      />
+      />}
     </View>
 
   );
@@ -93,7 +99,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   categoryCardWrapper: {
-    paddingHorizontal: Globalstyle.paddingLarge,
+    // paddingHorizontal: Globalstyle.paddingLarge,
+    marginHorizontal: Globalstyle.paddingLarge,
   },
   separator: {
     alignSelf: 'center',

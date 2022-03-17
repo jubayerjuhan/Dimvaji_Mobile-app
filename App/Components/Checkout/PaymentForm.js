@@ -3,12 +3,13 @@ import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native
 import AppButton from '../AppButton.js';
 import AppText from '../AppText.js';
 
-const PaymentForm = () => {
+const PaymentForm = ({ handlePress, setModal }) => {
   const [paymentMethods, setPaymentMethods] = React.useState(false);
   const methods = [
     { name: 'Cash On Delivery', id: 1 },
     { name: 'Bkash', id: 2 },
   ]
+
   return (
     <View>
       <FlatList
@@ -16,13 +17,15 @@ const PaymentForm = () => {
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => setPaymentMethods(item.name)} style={styles.container}>
-            <AppText font='Montserrat_600SemiBold' style={styles.item}>{item.name}</AppText>
-            {paymentMethods === item.name && <View style={styles.selected} />}
+            <AppText font='Montserrat_600SemiBold' style={styles.item} onPress={() => {
+              handlePress(item)
+              setModal(false)
+            }}>{item.name}</AppText>
+            {paymentMethods.id === item.id && <View style={styles.selected} />}
           </TouchableOpacity>
         )
         }
       />
-      <AppButton style={styles.btn} />
     </View>
   );
 }

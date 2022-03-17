@@ -29,6 +29,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
     // dispatch({ type: 'ADD_TO_CART', payload: product });
     dispatch(addToCart(product, quantity));
     setShowModal(true)
+    console.log(product, 'product');
   }
 
   const handleToCart = () => {
@@ -53,7 +54,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
         onPressSec={handleToCart}
         visible={showModal} />
 
-      <Image style={styles.image, { width: '100%', height: windowWidth }} source={{ uri: product.images[0].url }} />
+      <Image style={[styles.image, { width: '100%', height: windowWidth }]} source={{ uri: product.images[0].url }} />
       <AppText font='Montserrat_600SemiBold' style={styles.title}>{product.name}</AppText>
       <DescriptionComponent title='Description' description={product.description} />
 

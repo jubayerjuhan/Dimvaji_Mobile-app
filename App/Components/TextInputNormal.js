@@ -1,14 +1,14 @@
-import React from 'react';
-import { View, StyleSheet, TextInput, Text } from 'react-native';
-import Appcolor from '../../Appcolor.js';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import AppText from '../AppText.js';
-import { useFormikContext } from 'formik';
-import * as Yup from 'yup';
+import Appcolor from '../Appcolor.js';
+import { getProducts } from '../Redux/Actions/productaction.js';
+import { useDispatch } from 'react-redux';
 
 
-const TextInputIcon = ({ Icon, name, error, style, placeholder, icon, ...otherIcons }) => {
-  const { touched, setFieldTouched } = useFormikContext();
+
+const TextInputNormal = ({ Icon, name, error, style, placeholder, icon, setKeyword, ...otherIcons }) => {
+
 
   return (
     <>
@@ -19,14 +19,14 @@ const TextInputIcon = ({ Icon, name, error, style, placeholder, icon, ...otherIc
             {icon && <Ionicons name={icon} size={30} color={Appcolor.primary} />}
           </View>
           <TextInput
-            onBlur={() => setFieldTouched(name)}
+            onEnter
+            onSubmitEditing={(event) => setKeyword(event.nativeEvent.text)}
             {...otherIcons}
             style={styles.input}
             placeholder={placeholder}
           />
         </View>
       </View>
-      {(error && touched[name]) && <AppText style={styles.error}>{error}</AppText>}
     </>
   );
 }
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 60,
     fontFamily: 'Montserrat_400Regular',
-
   },
   icon: {
     position: 'absolute',
@@ -61,4 +60,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TextInputIcon;
+export default TextInputNormal;

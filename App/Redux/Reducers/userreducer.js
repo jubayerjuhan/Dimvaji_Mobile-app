@@ -35,7 +35,14 @@ export const authenticationReducer = (state = {}, action) => {
         ...state,
         error: null,
       };
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: null,
+        loggedIn: false,
+      };
     default:
       return state;
   }
 }
+

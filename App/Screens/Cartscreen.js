@@ -15,7 +15,7 @@ const Cartscreen = ({ navigation }) => {
 
   // calculate total price
   const calculatePrice = () => {
-    cartItems.forEach(item => {
+    cartItems?.forEach(item => {
       quantity += item.quantity;
       total += item.quantity * item.price;
     });
@@ -25,11 +25,12 @@ const Cartscreen = ({ navigation }) => {
   let total = 0;
   let quantity = 0;
   calculatePrice()
+  console.log(cartItems, 'cartItems');
 
   return (
     <Screen>
       <AppHeader title={"Cart"} navigation={navigation} />
-      {cartItems.length === 0 ?
+      {!cartItems || cartItems.length === 0 ?
         <View style={styles.container}>
           <Image source={require('../../assets/empty-cart.png')} style={styles.image} />
           <AppText>No Item's On Cart</AppText>

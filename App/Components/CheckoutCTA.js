@@ -7,7 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Appcolor from '../Appcolor.js';
 import { Ionicons } from '@expo/vector-icons';
 
-const CheckoutCTA = ({ title, editable, address, items, style, payment, handlePress }) => {
+const CheckoutCTA = ({ title, editable, address, items, style, payment, handlePress, paymentMethod }) => {
+  console.log(paymentMethod, 'pmpmpmp');
   return (
     <View style={[styles.container, style]}>
       <View style={styles.header}>
@@ -40,13 +41,11 @@ const CheckoutCTA = ({ title, editable, address, items, style, payment, handlePr
         </View>
       )}
 
-      {payment && (
+      {(payment && paymentMethod) ? (
         <View style={styles.payment}>
           <Ionicons style={styles.icon} name="cash" size={24} color='#089816' />
-          <AppText style={styles.cardText} >Cash On Delivery</AppText>
-        </View>
-      )}
-
+          <AppText style={styles.cardText} >{paymentMethod.name}</AppText>
+        </View>) : <AppText style={styles.cardText} >Select Payment Method</AppText>}
     </View>
   );
 }

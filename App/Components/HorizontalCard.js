@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Appcolor from '../Appcolor.js';
 import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart, deleteCartItem } from '../Redux/Actions/cartaction.js';
 
 
-const HorizontalCard = ({ noBtn, product }) => {
+const HorizontalCard = ({ noBtn, product, onPress }) => {
   const dispatch = useDispatch();
   const handlePlus = () => {
     // setQuantity(quantity + 1);
@@ -24,27 +24,27 @@ const HorizontalCard = ({ noBtn, product }) => {
   const handleDelete = () => {
     dispatch(deleteCartItem(product));
   }
-  console.log(product)
   return (
-    <View style={styles.container}>
-      <View>
-        <Image style={styles.image} source={{ uri: product.image }} />
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.container}>
+        <View>
+          <Image style={styles.image} source={{ uri: product?.image || product?.images[0]?.url }} />
+        </View>
+        <View style={{ width: '70%' }}>
+          <AppText style={styles.title} font='Montserrat_500Medium'>{product?.name}</AppText>
+          <AppText style={styles.price} font='Montserrat_600SemiBold'>{`$${product?.price}`}</AppText>
+          {noBtn ? null : (
+            <View style={styles.actions}>
+              <TouchableOpacity style={styles.icon} onPress={handleDelete}>
+                <DeleteIcon size={30} />
+                <AppText>Remove</AppText>
+              </TouchableOpacity>
+              <IncrementDecrement quantity={product?.quantity} handleMinus={handleMinus} handlePlus={handlePlus} />
+            </View>
+          )}
+        </View>
       </View>
-      <View style={{ width: '70%' }}>
-        <AppText style={styles.title} font='Montserrat_500Medium'>{product?.name}</AppText>
-        <AppText style={styles.price} font='Montserrat_600SemiBold'>{`$${product.price}`}</AppText>
-        {noBtn ? null : (
-          <View style={styles.actions}>
-            <TouchableOpacity style={styles.icon} onPress={handleDelete}>
-              <DeleteIcon size={30} />
-              <AppText>Remove</AppText>
-            </TouchableOpacity>
-            <IncrementDecrement quantity={product.quantity} handleMinus={handleMinus} handlePlus={handlePlus} />
-          </View>
-        )}
-      </View>
-
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

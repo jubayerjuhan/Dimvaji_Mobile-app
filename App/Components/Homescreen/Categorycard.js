@@ -11,9 +11,9 @@ const Categorycard = ({ title, style, large, item, onPress }) => {
         {large && <Image style={styles.img} source={item?.image} />}
         {!large && <Image style={styles.imgSmall} source={{ uri: `${item?.image}` }} />}
         <AppText font='Montserrat_600SemiBold' style={[{
-          fontSize: large ? 16 : 12,
-          bottom: large ? 20 : 12,
-          left: large ? 20 : 12,
+          fontSize: large ? 14 : 10,
+          bottom: large ? 15 : 10,
+          left: large ? 15 : 10,
         }, styles.text]} >{title}</AppText>
       </View>
     </TouchableWithoutFeedback>

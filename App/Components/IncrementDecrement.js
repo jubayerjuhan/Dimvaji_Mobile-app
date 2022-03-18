@@ -23,15 +23,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   fill: {
-    height: 35,
-    width: 35,
+    height: 25,
+    width: 25,
     backgroundColor: Appcolor.primary,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
   },
   quantity: {
-    width: 35,
+    width: 25,
     justifyContent: 'center',
     alignItems: 'center',
     color: Appcolor.primary,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Appcolor.white,
-    fontSize: 24,
+    fontSize: 15,
     alignSelf: 'center',
 
   }

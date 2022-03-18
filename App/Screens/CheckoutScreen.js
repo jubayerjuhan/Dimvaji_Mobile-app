@@ -130,10 +130,10 @@ const CheckoutScreen = ({ navigation, route }) => {
         </>) : null}
         <AppButton Icon={<WalletIcon />} title='Place Order' handlePress={handlePlaceOrder} loading={loading} />
         {success && (<CustomAlert
+          secBtnTitle='Go to Orders'
           onPressSec={handlePressSec}
           onPress={handleCloseModal}
           message='Order Placed Successfully'
-          secBtnTitle='Order'
           Animation={
             <LottieView
               autoPlay
@@ -202,15 +202,15 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   price: {
-    marginVertical: Globalstyle.paddingSmall,
+    marginVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    fontSize: 26,
+    fontSize: 14,
     color: Appcolor.yellow,
   },
   text: {
-    fontSize: 20,
+    fontSize: 14,
   },
   card: {
     marginVertical: Globalstyle.paddingSmall,

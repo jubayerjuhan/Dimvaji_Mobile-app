@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: 30
   },
   title: {
-    fontSize: 24,
+    fontSize: 16,
     paddingBottom: 20,
     textAlign: 'center',
     color: Appcolor.primary,

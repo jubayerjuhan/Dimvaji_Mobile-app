@@ -112,11 +112,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Appcolor.primary,
-    fontSize: 20,
+    fontSize: 14,
   },
   textLight: {
     color: Appcolor.secondary,
-    fontSize: 20,
+    fontSize: 14,
   },
   productCardWrapper: {
     marginTop: 20,

@@ -52,7 +52,6 @@ const OrderCard = ({ order }) => {
       <View style={styles.cardTextContainer}>
         <AppText style={styles.title}>Order: #{order._id}</AppText>
         <AppText font="Montserrat_600SemiBold" style={styles.price}>{`$${order?.priceBreakdown?.totalPrice}`}</AppText>
-
         <AppText style={styles.description}>Order Status: {order.orderStatus}</AppText>
       </View>
 

@@ -7,7 +7,6 @@ import Globalstyle from '../Globalstyle.js';
 import AppText from './AppText.js';
 
 const ProductCard = ({ product, onPress }) => {
-  console.log(product);
 
   return (
     <View style={styles.container}>
@@ -24,7 +23,7 @@ const ProductCard = ({ product, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    maxWidth: 175,
+    maxWidth: 150,
     padding: 12,
     borderColor: '#E5E5E5',
     borderWidth: 1,
@@ -33,16 +32,16 @@ const styles = StyleSheet.create({
   text: {
     color: Appcolor.primary,
     paddingTop: Globalstyle.paddingSmall,
-    fontSize: 16,
+    fontSize: 14,
   },
   price: {
     color: Appcolor.yellow,
     marginTop: Globalstyle.paddingSmall,
-    fontSize: 25,
+    fontSize: 20,
   },
   img: {
-    height: 150,
-    width: 150,
+    height: 120,
+    width: 120,
     borderRadius: 12,
   },
 });

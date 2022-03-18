@@ -36,8 +36,8 @@ const HorizontalCard = ({ noBtn, product, onPress }) => {
           {noBtn ? null : (
             <View style={styles.actions}>
               <TouchableOpacity style={styles.icon} onPress={handleDelete}>
-                <DeleteIcon size={30} />
-                <AppText>Remove</AppText>
+                <DeleteIcon size={20} />
+                <AppText style={{ fontSize: 12 }}>Remove</AppText>
               </TouchableOpacity>
               <IncrementDecrement quantity={product?.quantity} handleMinus={handleMinus} handlePlus={handlePlus} />
             </View>
@@ -50,7 +50,10 @@ const HorizontalCard = ({ noBtn, product, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 1,
+    // shadow
+    borderColor: Appcolor.lightGray,
+    borderWidth: 1,
+
     width: '100%',
     overflow: 'hidden',
 
@@ -64,18 +67,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   title: {
-    fontSize: 19,
+    fontSize: 14,
     color: Appcolor.primary,
     lineHeight: 25,
   },
   price: {
     marginTop: Globalstyle.padding5,
-    fontSize: 22,
+    fontSize: 20,
     color: Appcolor.yellow,
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginTop: Globalstyle.paddingSmall,
   },
 

@@ -8,7 +8,6 @@ import Appcolor from '../Appcolor.js';
 import { Ionicons } from '@expo/vector-icons';
 
 const CheckoutCTA = ({ title, editable, address, items, style, payment, handlePress, paymentMethod }) => {
-  console.log(paymentMethod, 'pmpmpmp');
   return (
     <View style={[styles.container, style]}>
       <View style={styles.header}>
@@ -40,14 +39,18 @@ const CheckoutCTA = ({ title, editable, address, items, style, payment, handlePr
           </View>
         </View>
       )}
-
-      {(payment && paymentMethod) ? (
-        <View style={styles.payment}>
-          <Ionicons style={styles.icon} name="cash" size={24} color='#089816' />
-          <AppText style={styles.cardText} >{paymentMethod.name}</AppText>
-        </View>) : <AppText style={styles.cardText} >Select Payment Method</AppText>}
+      {payment && (
+        <View style={styles.cardwrapper}>
+          <View style={[styles.header, {
+            marginBottom: Globalstyle.padding5
+          }]}>
+            <AppText style={styles.cardText} >Payment Method</AppText>
+            <AppText font='Montserrat_600SemiBold' style={styles.cardText} >{paymentMethod.name}</AppText>
+          </View>
+        </View>
+      )}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -55,13 +58,14 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     padding: Globalstyle.paddingLarge,
-    elevation: 2.1,
+    borderColor: Appcolor.lightGray,
+    borderWidth: 1,
   },
 
   cardText: {
     fontFamily: 'Montserrat_300Light',
-    fontSize: 18,
-    lineHeight: 24,
+    fontSize: 12,
+    lineHeight: 16,
     color: Appcolor.tertiary,
   },
   cardwrapper: {
@@ -72,8 +76,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
-    lineHeight: 22,
+    fontSize: 16,
+    lineHeight: 16,
     color: Appcolor.primary,
   },
   payment: {

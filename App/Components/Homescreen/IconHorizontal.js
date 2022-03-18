@@ -32,7 +32,6 @@ const IconHorizontal = ({ style, navigation }) => {
   }
   return (
     <View style={[styles.container, style]}>
-
       <View style={user ? styles.profileIcon : ''} >
         {user && <AntDesign name="user" size={24} color="black" />}
       </View>

@@ -42,7 +42,7 @@ const Cartscreen = ({ navigation }) => {
             style={styles.list}
             data={cartItems}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => <HorizontalCard product={item} />}
           />
           <View style={styles.bottom}>

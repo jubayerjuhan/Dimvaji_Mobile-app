@@ -22,8 +22,6 @@ const CustomAlert = ({ visible, onPress, message, onPressSec, Animation, secBtnT
           )}
 
           <AppText style={styles.text}>{message}</AppText>
-
-
           <View style={styles.btnWrapper}>
             {onPressSec &&
               <TouchableNativeFeedback onPress={onPressSec}>
